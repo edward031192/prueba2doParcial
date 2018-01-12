@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Consola de Administracion de BOTS</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="#{facesContext.externalContext.requestContextPath}/images/styles.css" rel="stylesheet"/>
+    </h:head>
+    <h:body> 
+        <div id="page">
+            <div class="header">
+                <img src="#{facesContext.externalContext.requestContextPath}/images/banner.png" height="100%" class="img-responsive" />
+            </div>
+            <div id="content">
+                <h:form>
+                    <ui:insert name="contenido">
+
+                    </ui:insert>
+                    <p>&nbsp;</p>
+                </h:form>
+            </div>
+            <div id="footer">
+                <div class="text-center center-block">
+                    
+                </div>
+                <div class="text-center center-block">
+                    <p class="txt-railway">Copyright © Gestor 2018</p>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

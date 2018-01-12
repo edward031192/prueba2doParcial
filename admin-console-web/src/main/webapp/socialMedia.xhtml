@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ES" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+        <ui:composition template="/templates/plantilla.xhtml">
+            <ui:define name="contenido">
+                <p:panel header="Administracion Social Media" >
+                    <p:dataTable value="#{socialMediaBean.socialMediaList}" var="socialMedia"
+                                 rows="5" paginator="true" paginatorPosition="bottom" selectionMode="single"
+                                 selection="#{socialMediaBean.socialMediaSel}" rowKey="#{socialMedia.codigo}">
+                        <p:ajax event="rowSelect" update="@form" />
+                        <p:ajax event="rowUnselect" update="@form" />
+                        <f:facet name="header">
+                            Listado de Redes Sociales
+                        </f:facet>
+                        <p:column headerText="Codigo" sortBy="#{socialMedia.codigo}">
+                            #{socialMedia.codigo}
+                        </p:column>
+                        <p:column headerText="Nombre" >
+                            #{socialMedia.nombre}
+                        </p:column>
+                        <f:facet name="footer">
+                            Registros Totales: #{socialMediaBean.socialMediaList.size()}
+                        </f:facet>
+                    </p:dataTable>
+                    <p:spacer height="10px"/>
+                    <p:commandButton value="Nuevo" actionListener="#{socialMediaBean.nuevo()}" update="@form"/>
+                    <p:commandButton value="Modificar" actionListener="#{socialMediaBean.modificar()}" update="@form" disabled="#{socialMediaBean.socialMediaSel == null}"/>
+                    <p:commandButton value="Eliminar" disabled="#{socialMediaBean.socialMediaSel == null}"/>
+                    <p:commandButton value="Detalles" actionListener="#{socialMediaBean.consultar()}" update="@form" disabled="#{socialMediaBean.socialMediaSel == null}"/>
+                    <p:spacer height="10px"/>
+                    <p:panel header="Registro de Redes Sociales" rendered="#{socialMediaBean.enNuevo or socialMediaBean.enModificar or socialMediaBean.enConsulta}">
+                        <p:panelGrid columns="3">
+                            <p:outputLabel for="codigo" value="Codigo" />
+                            <p:inputText id="codigo" value="#{socialMediaBean.socialMedia.codigo}" required="true" disabled="#{socialMediaBean.enModificar or socialMediaBean.enConsulta}"/>
+                            <p:message for="codigo" />
+                            <p:outputLabel for="nombre" value="Nombre" />
+                            <p:inputText id="nombre" value="#{socialMediaBean.socialMedia.nombre}" required="true" disabled="#{socialMediaBean.enConsulta}"/>
+                            <p:message for="nombre" />
+                        </p:panelGrid>
+                        <p:spacer height="5px"/>
+                        <p:commandButton value="Aceptar" actionListener="#{socialMediaBean.guardar()}" update="@form" rendered="#{not socialMediaBean.enConsulta}" />
+                        <p:commandButton value="Cancelar" actionListener="#{socialMediaBean.cancelar()}" update="@form" immediate="true"/>
+                    </p:panel>
+                    <p:messages globalOnly="true" showSummary="true" showDetail="true"  />
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+</html>
